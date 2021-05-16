@@ -14,6 +14,7 @@ import { CreateCustomerDto, UpdateCustomerDto } from '../dtos/customer.dto';
 
 @Controller( 'customers' )
 export class CustomerController {
+
     constructor( private customersService: CustomersService ) { }
 
     @Get()
@@ -21,9 +22,9 @@ export class CustomerController {
         return this.customersService.findAll();
     }
 
-    @Get( ':cust_id' )
-    get ( @Param( 'cust_id', ParseIntPipe ) cust_id: number ) {
-        return this.customersService.findOne( cust_id );
+    @Get( ':id' )
+    get ( @Param( 'id', ParseIntPipe ) id: number ) {
+        return this.customersService.findOne( id );
     }
 
     @Post()
@@ -31,16 +32,16 @@ export class CustomerController {
         return this.customersService.create( data );
     }
 
-    @Put( ':cust_id' )
+    @Put( ':id' )
     update (
-        @Param( 'cust_id', ParseIntPipe ) cust_id: number,
+        @Param( 'id', ParseIntPipe ) id: number,
         @Body() payload: UpdateCustomerDto,
     ) {
-        return this.customersService.update( cust_id, payload );
+        return this.customersService.update( id, payload );
     }
 
-    @Delete( ':cust_id' )
-    remove ( @Param( 'cust_id', ParseIntPipe ) cust_id: number ) {
-        return this.customersService.remove( cust_id );
+    @Delete( ':id' )
+    remove ( @Param( 'id', ParseIntPipe ) id: number ) {
+        return this.customersService.remove( id );
     }
 }

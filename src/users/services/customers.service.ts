@@ -19,10 +19,10 @@ export class CustomersService {
         return this.customers;
     }
 
-    findOne ( cust_id: number ) {
-        const customer = this.customers.find( ( item ) => item.id === cust_id );
+    findOne ( id: number ) {
+        const customer = this.customers.find( ( item ) => item.id === id );
         if ( !customer ) {
-            throw new NotFoundException( `Customer #${cust_id} not found` );
+            throw new NotFoundException( `Customer #${id} not found` );
         }
         return customer;
     }
@@ -37,9 +37,9 @@ export class CustomersService {
         return newCustomer;
     }
 
-    update ( cust_id: number, changes: UpdateCustomerDto ) {
-        const customer = this.findOne( cust_id );
-        const index = this.customers.findIndex( ( item ) => item.id === cust_id );
+    update ( id: number, changes: UpdateCustomerDto ) {
+        const customer = this.findOne( id );
+        const index = this.customers.findIndex( ( item ) => item.id === id );
         this.customers[ index ] = {
             ...customer,
             ...changes,
@@ -47,10 +47,10 @@ export class CustomersService {
         return this.customers[ index ];
     }
 
-    remove ( cust_id: number ) {
-        const index = this.customers.findIndex( ( item ) => item.id === cust_id );
+    remove ( id: number ) {
+        const index = this.customers.findIndex( ( item ) => item.id === id );
         if ( index === -1 ) {
-            throw new NotFoundException( `Customer #${cust_id} not found` );
+            throw new NotFoundException( `Customer #${id} not found` );
         }
         this.customers.splice( index, 1 );
         return true;
